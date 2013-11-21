@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoView var="view1" viewName="All Requests"></xp:dominoView>
+		<xp:dominoView var="view2" viewName="My Requests"
+			categoryFilter="#{javascript:@UserName()}">
+		</xp:dominoView>
+	</xp:this.data>
+	<xc:layout>
+		<xp:this.facets>
+			<xp:panel xp:key="facet_1">
+				<div class="col-md-2 column well well-sm">
+					<h2>Create Request</h2>
+					<p>
+						If you need new hardware, software or anything,
+						please raise the
+						request here. You can log back
+						in to see the status of your
+						requests.
+					</p>
+				</div>
+				<div class="col-md-4 column">
+					<h2>My Requests</h2>
+					<p>
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Ref</th>
+									<th>Type</th>
+									<th>Details</th>
+								</tr>
+							</thead>
+							<xp:repeat value="#{view2}" rows="100" var="allrequest"
+								indexVar="allrequestindex" disableOutputTag="true">
+								<xp:panel tagName="tr">
+									<xp:this.attrs>
+										<xp:attr name="onclick">
+											<xp:this.value><![CDATA[#{javascript:"window.location.href='" + allrequest.getColumnValue("Type").toLowerCase() + ".xsp?action=openDocument&documentId=" + allrequest.getUniversalID() + "';"}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
+									<xp:this.styleClass><![CDATA[#{javascript:if (allrequest.getColumnValue("Status") == "Completed"){
+	return "success";
+}else if (allrequest.getColumnValue("Status") == "New"){
+	return "danger";
+}else{
+	return "warning";
+}}]]></xp:this.styleClass>
+									<xp:text id="computedField1"
+										tagName="td" value="#{allrequest.DateCreated}">
+										<xp:this.converter>
+											<xp:convertDateTime
+												type="date">
+											</xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+									<xp:text id="computedField3"
+										tagName="td" value="#{allrequest.RequestID}">
+									</xp:text>
+									<xp:text id="computedField4"
+										tagName="td" value="#{allrequest.form}">
+									</xp:text>
+									<xp:text id="computedField5"
+										tagName="td">
+										<xp:this.value><![CDATA[#{javascript:org.apache.commons.lang.StringUtils.abbreviate(allrequest.getColumnValue("RequestDetails"), 100)}]]></xp:this.value>
+									</xp:text>
+								</xp:panel>
+							</xp:repeat>
+						</table>
+					</p>
+				</div>
+				<div class="col-md-6 column">
+					<a href="allrequests.xsp"><h2>All Requests</h2></a>
+					<p>
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Created By</th>
+									<th>Ref</th>
+									<th>Type</th>
+									<th>Details</th>
+								</tr>
+							</thead>
+							<xp:repeat value="#{view1}" rows="10" var="allrequest"
+								indexVar="allrequestindex" disableOutputTag="true">
+								<xp:panel tagName="tr">
+									<xp:this.styleClass><![CDATA[#{javascript:if (allrequest.getColumnValue("Status") == "Completed"){
+	return "success";
+}else if (allrequest.getColumnValue("Status") == "New"){
+	return "danger";
+}else{
+	return "warning";
+}}]]></xp:this.styleClass>
+									<xp:this.attrs>
+										<xp:attr name="onclick">
+											<xp:this.value><![CDATA[#{javascript:"window.location.href='" + allrequest.getColumnValue("Type").toLowerCase() + ".xsp?action=openDocument&documentId=" + allrequest.getUniversalID() + "';"}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
+									<xp:text id="datecreated" tagName="td"
+										value="#{allrequest.DateCreated}">
+										<xp:this.converter>
+											<xp:convertDateTime type="date">
+											</xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+									<xp:text id="createdby" tagName="td" value="#{allrequest.$2}">
+									</xp:text>
+									<xp:text id="ref" tagName="td" value="#{allrequest.RequestID}">
+									</xp:text>
+									<xp:text id="type" tagName="td" value="#{allrequest.form}">
+									</xp:text>
+									<xp:text id="details" tagName="td">
+										<xp:this.value><![CDATA[#{javascript:org.apache.commons.lang.StringUtils.abbreviate(allrequest.getColumnValue("RequestDetails"), 100)}]]></xp:this.value>
+									</xp:text>
+								</xp:panel>
+							</xp:repeat>
+						</table>
+					</p>
+				</div>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+</xp:view>

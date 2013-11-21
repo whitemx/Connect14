@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="Hardware Request">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="User"
+			computeWithForm="onsave">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xc:layout>
+		<xp:this.facets>
+			<xp:panel xp:key="facet_1">
+				<xp:this.attrs>
+					<xp:attr name="role" value="form"></xp:attr>
+				</xp:this.attrs>
+				<div class="form-group">
+					<xp:label value="User Name:" id="title_Label1" for="title1">
+					</xp:label>
+					<xp:inputText value="#{document1.UserName}" id="title1"
+						styleClass="form-control" required="true">
+						<xp:this.validators>
+							<xp:validateRequired message="Please enter the new User Name">
+							</xp:validateRequired>
+						</xp:this.validators>
+					</xp:inputText>
+				</div>
+				<div class="form-group">
+					<xp:label value="Status:" id="status_Label1" for="status1">
+					</xp:label>
+					<xp:comboBox value="#{document1.Status}" id="status1"
+						styleClass="form-control">
+						<xp:selectItem itemLabel="New"></xp:selectItem>
+						<xp:selectItem itemLabel="In Progress"></xp:selectItem>
+						<xp:selectItem itemLabel="Completed"></xp:selectItem>
+						<xp:selectItem itemLabel="Rejected"></xp:selectItem>
+					</xp:comboBox>
+				</div>
+				<div class="form-group">
+					<xp:label value="Request details:" id="requestDetails_Label1"
+						for="requestDetails1">
+					</xp:label>
+					<xp:inputTextarea value="#{document1.RequestDetails}"
+						styleClass="form-control" id="requestDetails1">
+					</xp:inputTextarea>
+				</div>
+				<div class="form-group">
+					<xp:label value="Software Access:" id="softwareaccesslabel" for="softwareaccess"></xp:label>
+					<xp:checkBoxGroup id="softwareaccess"
+						layout="pageDirection" value="#{document1.AccessSystems}">
+						<xp:selectItem itemLabel="IBM Traveler"></xp:selectItem>
+						<xp:selectItem itemLabel="IBM Notes"></xp:selectItem>
+						<xp:selectItem itemLabel="IBM Connections"></xp:selectItem>
+						<xp:selectItem itemLabel="Approvals"></xp:selectItem>
+						<xp:selectItem
+							itemLabel="Sales &amp; Marketing">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Dev Tools"></xp:selectItem>
+						<xp:selectItem itemLabel="Mobile Applications"></xp:selectItem>
+					</xp:checkBoxGroup>
+				</div>
+				<div class="form-group">
+					<xp:label value="Completion date:" id="completionDate_Label1"
+						for="completionDate1">
+					</xp:label>
+					<xp:text value="#{document1.CompletionDate}" id="completionDate1"
+						styleClass="form-control">
+						<xp:this.converter>
+							<xp:convertDateTime type="date"></xp:convertDateTime>
+						</xp:this.converter>
+					</xp:text>
+				</div>
+				<div class="form-group">
+					<xp:messages layout="table" style="color:red" id="messages1">
+					</xp:messages>
+					<xc:buttons></xc:buttons>
+				</div>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success" viewId="/home.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>

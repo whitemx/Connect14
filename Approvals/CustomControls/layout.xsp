@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:script src="js/jquery-2.0.3.min.js" clientSide="true"></xp:script>
+		<xp:script src="js/bootstrap.min.js" clientSide="true"></xp:script>
+		<xp:script src="js/custom.js" clientSide="true"></xp:script>
+		<xp:styleSheet href="/css/bootstrap.min.css"></xp:styleSheet>
+		<xp:styleSheet href="/css/custom.css"></xp:styleSheet>
+	</xp:this.resources>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">
+								Toggle navigation
+							</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="home.xsp">Approvals</a>
+					</div>
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="home.xsp">Home</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									New Request
+									<strong class="caret"></strong>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="hardware.xsp">Hardware</a>
+									</li>
+									<li>
+										<a href="user.xsp">User</a>
+									</li>
+									<li>
+										<a href="software.xsp">Software</a>
+									</li>
+									<li class="divider">
+									</li>
+									<li>
+										<a href="downtime.xsp">Downtime</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<xp:text id="username" tagName="a">
+									<xp:this.value><![CDATA[#{javascript:@Name("[CN]", @UserName())}]]></xp:this.value>
+									<xp:this.attrs>
+										<xp:attr name="href" value="#"></xp:attr>
+									</xp:this.attrs>
+								</xp:text>
+							</li>
+							<li>
+								<xp:text id="loginlogout" tagName="a">
+									<xp:this.value><![CDATA[#{javascript:if (@UserName() == "Anonymous"){
+	return "Login";
+}else{
+	return "Logout";
+}}]]></xp:this.value>
+									<xp:this.attrs>
+										<xp:attr name="href">
+											<xp:this.value><![CDATA[#{javascript:var dbPath = "/" + @ReplaceSubstring(database.getFilePath(), "\\", "/");
+if (@UserName() == "Anonymous"){
+	return dbPath + "?open&login";
+}else{
+	return dbPath + "?logout&redirectto=" + dbPath + "/home.xsp";
+}}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
+								</xp:text>
+							</li>
+						</ul>
+						<span class="navbar-form navbar-right" role="search">
+							<div class="form-group">
+								<input id="searchfield" type="text" class="form-control"
+									placeholder="Search..." />
+							</div>
+							<button type="button" onclick="doSearch()" class="btn btn-default">
+								Submit
+							</button>
+						</span>
+
+					</div>
+
+				</nav>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<xp:callback facetName="facet_1" id="callback1"></xp:callback>
+		</div>
+	</div>
+</xp:view>

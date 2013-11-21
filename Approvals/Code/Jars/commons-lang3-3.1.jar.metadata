@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="80257C200033D55E" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1d6" sequence="3" unid="B4FE45ABE6AAE64580257C20005D0A50">
+<created><datetime>20131111T165614,88+00</datetime></created>
+<modified><datetime>20131121T145255,27+00</datetime></modified>
+<revised><datetime>20131121T145255,26+00</datetime></revised>
+<lastaccessed><datetime>20131121T145255,27+00</datetime></lastaccessed>
+<addedtofile><datetime>20131111T165614,89+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt White/O=Exhilarate</name><name>CN=Matt White/O=Connect14</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Connect14</name></wassignedby>
+<item name="$TITLE"><text>commons-lang3-3.1.jar</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+<item name="$Flags"><text>34567Cg~,</text></item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>commons-lang3-3.1.jar</text></item></note>

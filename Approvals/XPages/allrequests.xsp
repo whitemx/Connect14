@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoView var="view1" viewName="All Requests">
+			<xp:this.search><![CDATA[#{javascript:context.getUrlParameter("query")}]]></xp:this.search>
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xc:layout>
+		<xp:this.facets>
+			<xp:panel xp:key="facet_1" styleClass="col-md-12 column">
+
+				<xp:text tagName="h2" id="title">
+					<xp:this.value><![CDATA[#{javascript:if (context.getUrlParameter("query") == ""){
+	return "All Requests";
+}else{
+	return "Requests matching '" + context.getUrlParameter("query") + "'";
+}}]]></xp:this.value>
+				</xp:text>
+				<p>
+					<xp:pager partialRefresh="true" id="pager1"
+						pageCount="5" styleClass="pagination" alwaysCalculateLast="true"
+						panelPosition="right" for="allrequests">
+						<xp:pagerControl type="Previous"
+							id="pagerControl1" styleClass="previouspager" value="«">
+						</xp:pagerControl>
+						<xp:pagerControl type="Group" id="pagerControl2"
+							styleClass="numberpager" currentStyleClass="currentpage">
+						</xp:pagerControl>
+						<xp:pagerControl type="Next" id="pagerControl3"
+							styleClass="nextpager" value="»">
+						</xp:pagerControl>
+					</xp:pager>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Created By</th>
+								<th>Ref</th>
+								<th>Status</th>
+								<th>Type</th>
+								<th>Details</th>
+								
+							</tr>
+						</thead>
+						<xp:repeat id="allrequests" value="#{view1}" rows="30" var="allrequest"
+							indexVar="allrequestindex" disableOutputTag="true">
+							<xp:panel tagName="tr">
+									<xp:this.styleClass><![CDATA[#{javascript:if (allrequest.getColumnValue("Status") == "Completed"){
+	return "success";
+}else if (allrequest.getColumnValue("Status") == "New"){
+	return "danger";
+}else{
+	return "warning";
+}}]]></xp:this.styleClass>
+								<xp:this.attrs>
+									<xp:attr name="onclick">
+										<xp:this.value><![CDATA[#{javascript:"window.location.href='" + allrequest.getColumnValue("Type").toLowerCase() + ".xsp?action=openDocument&documentId=" + allrequest.getUniversalID() + "';"}]]></xp:this.value>
+									</xp:attr>
+								</xp:this.attrs>
+								<xp:text id="datecreated" tagName="td"
+									value="#{allrequest.DateCreated}">
+									<xp:this.converter>
+										<xp:convertDateTime type="date">
+										</xp:convertDateTime>
+									</xp:this.converter>
+								</xp:text>
+								<xp:text id="createdby" tagName="td" value="#{allrequest.$2}">
+								</xp:text>
+								<xp:text id="ref" tagName="td" value="#{allrequest.RequestID}">
+								</xp:text>
+								<xp:text id="status" tagName="td" value="#{allrequest.Status}">
+								</xp:text>
+								<xp:text id="type" tagName="td" value="#{allrequest.form}">
+								</xp:text>
+								<xp:text id="details" tagName="td"
+									value="#{allrequest.RequestDetails}">
+								</xp:text>
+							</xp:panel>
+						</xp:repeat>
+					</table>
+					<xp:pager partialRefresh="true" id="pager2"
+						pageCount="5" styleClass="pagination" alwaysCalculateLast="true"
+						panelPosition="right" for="allrequests">
+						<xp:pagerControl type="Previous"
+							id="pagerControl4" styleClass="previouspager" value="«">
+						</xp:pagerControl>
+						<xp:pagerControl type="Group" id="pagerControl5"
+							styleClass="numberpager" currentStyleClass="currentpage">
+						</xp:pagerControl>
+						<xp:pagerControl type="Next" id="pagerControl6"
+							styleClass="nextpager" value="»">
+						</xp:pagerControl>
+					</xp:pager>
+				</p>
+
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+</xp:view>
