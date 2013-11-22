@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:restService id="allrequests" pathInfo="allrequests">
+		<xe:this.service>
+			<xe:viewJsonService viewName="All Requests"
+				defaultColumns="true">
+			</xe:viewJsonService>
+		</xe:this.service>
+	</xe:restService>
+	<xe:restService id="restService1" pathInfo="myrequests">
+		<xe:this.service>
+			<xe:viewJsonService viewName="My Requests"
+				defaultColumns="true" categoryFilter="#{javascript:@UserName()}">
+			</xe:viewJsonService>
+		</xe:this.service>
+	</xe:restService>
+	<xe:restService id="restService2" pathInfo="hardware">
+		<xe:this.service>
+			<xe:documentJsonService computeWithForm="true"
+				var="hardwaredoc" defaultItems="true" formName="Hardware">
+			</xe:documentJsonService>
+		</xe:this.service>
+	</xe:restService>
+	<xe:restService id="restService3" pathInfo="software">
+		<xe:this.service>
+			<xe:documentJsonService computeWithForm="true"
+				defaultItems="true" formName="Software" var="softwaredoc">
+			</xe:documentJsonService>
+		</xe:this.service>
+	</xe:restService>
+	<xe:restService id="restService4" pathInfo="user">
+		<xe:this.service>
+			<xe:documentJsonService computeWithForm="true"
+				defaultItems="true" formName="User" var="userdoc">
+			</xe:documentJsonService>
+		</xe:this.service>
+	</xe:restService>
+</xp:view>
