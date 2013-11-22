@@ -14,7 +14,7 @@
 					<h2>Create Request</h2>
 					<p>
 						If you need new hardware, software or anything,
-						please raise the
+						please raise the 
 						request here. You can log back
 						in to see the status of your
 						requests.
@@ -63,7 +63,7 @@
 									</xp:text>
 									<xp:text id="computedField5"
 										tagName="td">
-										<xp:this.value><![CDATA[#{javascript:org.apache.commons.lang.StringUtils.abbreviate(allrequest.getColumnValue("RequestDetails"), 100)}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:org.apache.commons.lang3.StringUtils.abbreviate(allrequest.getColumnValue("RequestDetails"), 100)}]]></xp:this.value>
 									</xp:text>
 								</xp:panel>
 							</xp:repeat>
@@ -112,7 +112,7 @@
 									<xp:text id="type" tagName="td" value="#{allrequest.form}">
 									</xp:text>
 									<xp:text id="details" tagName="td">
-										<xp:this.value><![CDATA[#{javascript:org.apache.commons.lang.StringUtils.abbreviate(allrequest.getColumnValue("RequestDetails"), 100)}]]></xp:this.value>
+										<xp:this.value><![CDATA[#{javascript:org.apache.commons.lang3.StringUtils.abbreviate(allrequest.getColumnValue("RequestDetails"), 100)}]]></xp:this.value>
 									</xp:text>
 								</xp:panel>
 							</xp:repeat>
