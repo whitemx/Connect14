@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
-
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" rendered="false">
+	<xp:this.resources>
+		<xp:script src="/Workflow.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.afterRenderResponse><![CDATA[#{javascript:com.connect.rest.ApprovalsService.renderService();}]]></xp:this.afterRenderResponse>
 	<xe:restService id="allrequests" pathInfo="allrequests">
 		<xe:this.service>
 			<xe:viewJsonService viewName="All Requests"
@@ -13,27 +17,6 @@
 			<xe:viewJsonService viewName="My Requests"
 				defaultColumns="true" categoryFilter="#{javascript:@UserName()}">
 			</xe:viewJsonService>
-		</xe:this.service>
-	</xe:restService>
-	<xe:restService id="restService2" pathInfo="hardware">
-		<xe:this.service>
-			<xe:documentJsonService computeWithForm="true"
-				var="hardwaredoc" defaultItems="true" formName="Hardware">
-			</xe:documentJsonService>
-		</xe:this.service>
-	</xe:restService>
-	<xe:restService id="restService3" pathInfo="software">
-		<xe:this.service>
-			<xe:documentJsonService computeWithForm="true"
-				defaultItems="true" formName="Software" var="softwaredoc">
-			</xe:documentJsonService>
-		</xe:this.service>
-	</xe:restService>
-	<xe:restService id="restService4" pathInfo="user">
-		<xe:this.service>
-			<xe:documentJsonService computeWithForm="true"
-				defaultItems="true" formName="User" var="userdoc">
-			</xe:documentJsonService>
 		</xe:this.service>
 	</xe:restService>
 </xp:view>

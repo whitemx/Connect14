@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:script src="/Workflow.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
 	<xp:button value="In Progress" id="button5" styleClass="btn">
 		<xp:this.rendered><![CDATA[#{javascript:document1.isNewNote() || document1.getItemValueString("Status") == "New"}]]></xp:this.rendered>
 		<xp:eventHandler event="onclick" submit="true"
 			refreshMode="complete">
 			<xp:this.action>
 				<xp:actionGroup>
-					<xp:changeDocumentMode mode="edit" var="document1">
-					</xp:changeDocumentMode>
-
-					<xp:modifyField name="Status" value="In Progress"
-						var="document1">
-					</xp:modifyField>
-					<xp:saveDocument var="document1"></xp:saveDocument>
 					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:emailBean.setCcList( "Matt White/FCL" );
-emailBean.setSubject("Work Item updated: " + document1.getItemValueString("RequestID"));
-emailBean.setSenderEmail("matt@londc.com");
-emailBean.setSenderName("Matt White");
-emailBean.addHTML("<p>Your work request " + document1.getItemValueString("RequestID") + " has modified, the status is " + document1.getItemValueString("Status") + "</p>");
-emailBean.addHTML("<p>You can <a href=\"http://development/ibmconnect/approvals.nsf/hardware.xsp?action=openDocument&documentId=" + document1.getDocument().getUniversalID() + "\">view the request here</a></p>");
-emailBean.send();
-}]]></xp:this.script>
+						<xp:this.script><![CDATA[#{javascript:changeStatus(document1.getDocument(), "In Progress");}]]></xp:this.script>
 					</xp:executeScript>
-					<xp:openPage name="/hardware.xsp" target="openDocument"
+					<xp:openPage name="#{javascript:view.getPageName()}"
+						target="openDocument"
 						documentId="#{javascript:document1.getDocument().getUniversalID()}">
 					</xp:openPage>
-
-					
 				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>
@@ -41,25 +29,10 @@ emailBean.send();
 			<xp:this.action>
 				<xp:actionGroup>
 					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:emailBean.setSendTo( document1.getItemValueString("CreatedBy") );
-emailBean.setCcList( "Matt White/FCL" );
-emailBean.setSubject("Work Item updated: " + document1.getItemValueString("RequestID"));
-emailBean.setSenderEmail("matt@londc.com");
-emailBean.setSenderName("Matt White");
-emailBean.addHTML("<p>Your work request " + document1.getItemValueString("RequestID") + " has modified, the status is " + document1.getItemValueString("Status") + "</p>");
-emailBean.addHTML("<p>You can <a href=\"http://development/ibmconnect/approvals.nsf/hardware.xsp?action=openDocument&documentId=" + document1.getDocument().getUniversalID() + "\">view the request here</a></p>");
-emailBean.send();
-}]]></xp:this.script>
+						<xp:this.script><![CDATA[#{javascript:changeStatus(document1.getDocument(true), "Completed");}]]></xp:this.script>
 					</xp:executeScript>
-					<xp:changeDocumentMode mode="edit" var="document1">
-					</xp:changeDocumentMode>
-					<xp:modifyField var="document1" name="CompletionDate"
-						value="#{javascript:@Now()}">
-					</xp:modifyField>
-					<xp:modifyField name="Status" value="Completed" var="document1">
-					</xp:modifyField>
-					<xp:saveDocument var="document1"></xp:saveDocument>
-					<xp:openPage name="/hardware.xsp" target="openDocument"
+					<xp:openPage name="#{javascript:view.getPageName()}"
+						target="openDocument"
 						documentId="#{javascript:document1.getDocument().getUniversalID()}">
 					</xp:openPage>
 				</xp:actionGroup>
@@ -84,18 +57,13 @@ emailBean.send();
 			refreshMode="complete">
 			<xp:this.action>
 				<xp:actionGroup>
-					<xp:saveDocument var="document1"></xp:saveDocument>
 					<xp:executeScript>
-						<xp:this.script><![CDATA[#{javascript:emailBean.setCcList( "Matt White/FCL" );
-emailBean.setSubject("Work Item updated: " + document1.getItemValueString("RequestID"));
-emailBean.setSenderEmail("matt@londc.com");
-emailBean.setSenderName("Matt White");
-emailBean.addHTML("<p>Your work request " + document1.getItemValueString("RequestID") + " has modified, the status is " + document1.getItemValueString("Status") + "</p>");
-emailBean.addHTML("<p>You can <a href=\"http://development/ibmconnect/approvals.nsf/hardware.xsp?action=openDocument&documentId=" + document1.getDocument().getUniversalID() + "\">view the request here</a></p>");
-emailBean.send();
-}]]></xp:this.script>
+						<xp:this.script><![CDATA[#{javascript:saveDocument(document1.getDocument(true));}]]></xp:this.script>
 					</xp:executeScript>
-					<xp:openPage name="/home.xsp"></xp:openPage>
+					<xp:openPage name="#{javascript:view.getPageName()}"
+						target="openDocument"
+						documentId="#{javascript:document1.getDocument().getUniversalID()}">
+					</xp:openPage>
 				</xp:actionGroup>
 			</xp:this.action>
 		</xp:eventHandler>

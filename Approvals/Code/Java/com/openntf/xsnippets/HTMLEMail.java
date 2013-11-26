@@ -49,14 +49,14 @@ public class HTMLEMail implements Serializable {
 	private String bannerHTML = "";
 	private String footerHTML = "";
 
-	private boolean debugMode = false;
+	private boolean debugMode = true;
 
 	private static final Pattern imgRegExp = Pattern
 			.compile("<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>");
 
 	// UK: 25.04.2012 added. The bean can be called from within another java
 	// class then
-	public static final String BEAN_NAME = "htmlemail"; // name of the bean
+	public static final String BEAN_NAME = "emailBean"; // name of the bean
 
 	public static HTMLEMail get() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -600,5 +600,20 @@ public class HTMLEMail implements Serializable {
 	}
 
 	// -------------------------------------------------------------------------
+	
+	static public void sendNotification(Document doc){
+		try{
+			HTMLEMail email = new HTMLEMail();
+			email.setCcList( "Matt White" );
+			email.setSubject("Work Item updated: " + doc.getItemValueString("RequestID"));
+			email.setSenderEmail("matt@londc.com");
+			email.setSenderName("Matt White");
+			email.addHTML("<p>Your work request " + doc.getItemValueString("RequestID") + " has modified, the status is " + doc.getItemValueString("Status") + "</p>");
+			email.addHTML("<p>You can <a href=\"http://development/ibmconnect/approvals.nsf/hardware.xsp?action=openDocument&documentId=" + doc.getUniversalID() + "\">view the request here</a></p>");
+			email.send();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 
 } // end EmailBean

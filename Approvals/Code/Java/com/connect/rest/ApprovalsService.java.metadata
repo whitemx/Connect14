@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="80257C200033D55E" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="296" sequence="37" unid="9748F73A4CDFA87E80257C2E0045D8C9">
+<created><datetime>20131125T124254,81+00</datetime></created>
+<modified><datetime>20131125T143948,62+00</datetime></modified>
+<revised><datetime>20131125T143948,61+00</datetime></revised>
+<lastaccessed><datetime>20131125T143948,62+00</datetime></lastaccessed>
+<addedtofile><datetime>20131125T124254,82+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Matt White/O=Connect14</name></updatedby>
+<wassignedby><name>CN=Matt White/O=Connect14</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>com/connect/rest/ApprovalsService.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/connect/rest/ApprovalsService.java</text></item>
+
+</note>
